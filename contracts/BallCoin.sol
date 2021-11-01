@@ -16,9 +16,10 @@ contract BallCoin is ERC20 {
 	event BallTransfer(address indexed _from, address indexed _to, uint256 _number);
 
 	constructor() ERC20("BallCoin", "BLC") {
-		balances[tx.origin] = 10000;
+		uint totalSupply = 1000000 * (10 ** uint256(decimals()));
+		balances[tx.origin] = totalSupply;
 		numBalls[tx.origin] = 3;
-		_mint(msg.sender, 1000000 * (10 ** uint256(decimals())));
+		_mint(msg.sender, totalSupply);
 	}
 
 	function sendCoin(address receiver, uint amount) public returns(bool sufficient) {
