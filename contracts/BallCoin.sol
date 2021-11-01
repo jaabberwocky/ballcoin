@@ -2,23 +2,23 @@
 pragma solidity >=0.4.25;
 
 import "./ConvertLib.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 // This is just a simple example of a coin-like contract.
 // It is not standards compatible and cannot be expected to talk to other
 // coin/token contracts. If you want to create a standards-compliant
 // token, see: https://github.com/ConsenSys/Tokens. Cheers!
 
-contract BallCoin {
+contract BallCoin is ERC20 {
 	mapping (address => uint) balances;
-	mapping (address => uint) public numBalls;
-
-	event Transfer(address indexed _from, address indexed _to, uint256 _value);
+	mapping (address => uint) numBalls;
 
 	event BallTransfer(address indexed _from, address indexed _to, uint256 _number);
 
-	constructor() public {
+	constructor() ERC20("BallCoin", "BLC") {
 		balances[tx.origin] = 10000;
 		numBalls[tx.origin] = 3;
+		_mint(msg.sender, 1000000 * (10 ** uint256(decimals())));
 	}
 
 	function sendCoin(address receiver, uint amount) public returns(bool sufficient) {
