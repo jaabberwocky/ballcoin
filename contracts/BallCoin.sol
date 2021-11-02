@@ -5,11 +5,9 @@ import "./ConvertLib.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-// This is just a simple example of a coin-like contract.
-// It is not standards compatible and cannot be expected to talk to other
-// coin/token contracts. If you want to create a standards-compliant
-// token, see: https://github.com/ConsenSys/Tokens. Cheers!
-
+/**
+ * @dev Contract module for BallCoin. Pretty simple ERC20 token done for learning purposes.
+ */
 contract BallCoin is ERC20, Ownable {
 	mapping (address => uint) balances;
 	mapping (address => uint) numBalls;
@@ -44,11 +42,11 @@ contract BallCoin is ERC20, Ownable {
 		ballName = _ballName;
 	}
 
-	function sendCoin(address receiver, uint amount) public returns(bool sufficient) {
-		if (balances[msg.sender] < amount) return false;
-		balances[msg.sender] -= amount;
-		balances[receiver] += amount;
-		emit Transfer(msg.sender, receiver, amount);
+	function sendCoin(address _receiver, uint _amount) public returns(bool sufficient) {
+		if (balances[msg.sender] < _amount) return false;
+		balances[msg.sender] -= _amount;
+		balances[_receiver] += _amount;
+		emit Transfer(msg.sender, _receiver, _amount);
 		return true;
 	}
 
@@ -60,12 +58,12 @@ contract BallCoin is ERC20, Ownable {
 		return true;
 	}
 
-	function getBalanceInEth(address addr) public view returns(uint){
-		return ConvertLib.convert(getBalance(addr),2);
+	function getBalanceInEth(address _addr) public view returns(uint){
+		return ConvertLib.convert(getBalance(_addr),2);
 	}
 
-	function getBalance(address addr) public view returns(uint) {
-		return balances[addr];
+	function getBalance(address _addr) public view returns(uint) {
+		return balances[_addr];
 	}
 
 	function getBall(address _addr) public view returns(uint) {
