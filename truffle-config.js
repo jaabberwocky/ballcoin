@@ -25,11 +25,11 @@ module.exports = {
           process.env.MNEMONIC,
           `https://ropsten.infura.io/v3/${process.env.PROJECT_ID}`
         ),
-      network_id: 3, // Ropsten's id
-      gas: 5500000, // Ropsten has a lower block limit than mainnet
-      confirmations: 2, // # of confs to wait between deployments. (default: 0)
-      timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+      network_id: 3, 
+      gas: 5500000, 
+      confirmations: 2, 
+      timeoutBlocks: 200, 
+      skipDryRun: true
     },
     rinkeby: {
       provider: function () {
@@ -39,8 +39,8 @@ module.exports = {
         );
       },
       network_id: 4,
-      gas: 4500000,
-      gasPrice: 10000000000,
+      gas: 2000000,
+      gasPrice: 10000000,
     },
   },
   compilers: {
