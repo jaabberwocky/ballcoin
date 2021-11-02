@@ -25,7 +25,7 @@ contract BallCoin is ERC20, Ownable {
 	event BallTransfer(address indexed _from, address indexed _to, uint256 _number);
 
 	constructor() ERC20("BallCoin", "BLC") {
-		uint totalSupply = 10000;
+		uint totalSupply = 10000 * 10 ** (decimals());
 		uint totalBalls = 30;
 		balances[tx.origin] = totalSupply;
 
